@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu do Restaurante</title>
+    <style>
+        /* Estilos CSS aqui */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #pedido {
+            margin-top: 20px;
+        }
+
+        #imagemDoPedido {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Menu do Restaurante</h1>
+
+    <div id="entrada">
+        <h2>Escolha uma Entrada:</h2>
+        <ul>
+            <li>
+                <input type="radio" name="entrada" value="entrada1" id="entrada1">
+                <label for="entrada1">Entrada 1</label>
+            </li>
+            <li>
+                <input type="radio" name="entrada" value="entrada2" id="entrada2">
+                <label for="entrada2">Entrada 2</label>
+            </li>
+            <li>
+                <input type="radio" name="entrada" value="entrada3" id="entrada3">
+                <label for="entrada3">Entrada 3</label>
+            </li>
+        </ul>
+    </div>
+
+    <div id="pratoPrincipal">
+        <h2>Escolha um Prato Principal:</h2>
+        <ul>
+            <li>
+                <input type="radio" name="pratoPrincipal" value="prato1" id="prato1">
+                <label for="prato1">Prato 1</label>
+            </li>
+            <li>
+                <input type="radio" name="pratoPrincipal" value="prato2" id="prato2">
+                <label for="prato2">Prato 2</label>
+            </li>
+            <li>
+                <input type="radio" name="pratoPrincipal" value="prato3" id="prato3">
+                <label for="prato3">Prato 3</label>
+            </li>
+            <li>
+                <input type="radio" name="pratoPrincipal" value="prato4" id="prato4">
+                <label for="prato4">Prato 4</label>
+            </li>
+            <li>
+                <input type="radio" name="pratoPrincipal" value="prato5" id="prato5">
+                <label for="prato5">Prato 5</label>
+            </li>
+        </ul>
+    </div>
+
+    <div id="sobremesa">
+        <h2>Escolha uma Sobremesa:</h2>
+        <ul>
+            <li>
+                <input type="radio" name="sobremesa" value="sobremesa1" id="sobremesa1">
+                <label for="sobremesa1">Sobremesa 1</label>
+            </li>
+            <li>
+                <input type="radio" name="sobremesa" value="sobremesa2" id="sobremesa2">
+                <label for="sobremesa2">Sobremesa 2</label>
+            </li>
+            <li>
+                <input type="radio" name="sobremesa" value="sobremesa3" id="sobremesa3">
+                <label for="sobremesa3">Sobremesa 3</label>
+            </li>
+        </ul>
+    </div>
+
+    <button onclick="mostrarPedido()">Finalizar Pedido</button>
+
+    <div id="pedido">
+        <h2>Pedido:</h2>
+        <ul>
+            <li id="entradaEscolhida">-</li>
+            <li id="pratoPrincipalEscolhido">-</li>
+            <li id="sobremesaEscolhida">-</li>
+        </ul>
+    </div>
+
+    <img id="imagemDoPedido" src="" alt="Imagem do Pedido">
+
+    <script>
+        // JavaScript aqui
+        function mostrarPedido() {
+            const entradaSelecionada = document.querySelector('input[name="entrada"]:checked');
+            const pratoPrincipalSelecionado = document.querySelector('input[name="pratoPrincipal"]:checked');
+            const sobremesaSelecionada = document.querySelector('input[name="sobremesa"]:checked');
+
+            if (entradaSelecionada && pratoPrincipalSelecionado && sobremesaSelecionada) {
+                const pedido = document.getElementById('pedido');
+                const imagemDoPedido = document.getElementById('imagemDoPedido');
+
+                const escolhaEntrada = entradaSelecionada.nextSibling.textContent;
+                const escolhaPratoPrincipal = pratoPrincipalSelecionado.nextSibling.textContent;
+                const escolhaSobremesa = sobremesaSelecionada.nextSibling.textContent;
+
+                const imagens = {
+                    entrada1: 'caminho-da-imagem-entrada1.jpg',
+                    entrada2: 'caminho-da-imagem-entrada2.jpg',
+                    entrada3: 'caminho-da-imagem-entrada3.jpg',
+                    prato1: 'caminho-da-imagem-prato1.jpg',
+                    prato2: 'caminho-da-imagem-prato2.jpg',
+                    prato3: 'caminho-da-imagem-prato3.jpg',
+                    prato4: 'caminho-da-imagem-prato4.jpg',
+                    prato5: 'caminho-da-imagem-prato5.jpg',
+                    sobremesa1: 'caminho-da-imagem-sobremesa1.jpg',
+                    sobremesa2: 'caminho-da-imagem-sobremesa2.jpg',
+                    sobremesa3: 'caminho-da-imagem-sobremesa3.jpg',
+                };
+
+                const imagemEntrada = imagens[entradaSelecionada.value];
+                const imagemPratoPrincipal = imagens[pratoPrincipalSelecionado.value];
+                const imagemSobremesa = imagens[sobremesaSelecionada.value];
+
+                // Atualiza a imagem exibida na página
+                imagemDoPedido.src = imagemEntrada; // Você pode combinar todas as imagens como desejar
+                imagemDoPedido.alt = "Imagem do Pedido"; // Atualize a descrição da imagem conforme necessário
+
+                // Exibe o pedido na página
+                document.getElementById('entradaEscolhida').textContent = `Entrada: ${escolhaEntrada}`;
+                document.getElementById('pratoPrincipalEscolhido').textContent = `Prato Principal: ${escolhaPratoPrincipal}`;
+                document.getElementById('sobremesaEscolhida').textContent = `Sobremesa: ${escolhaSobremesa}`;
+            } else {
+                alert('Por favor, selecione uma opção de entrada, prato principal e sobremesa.');
+            }
+        }
+    </script>
+</body>
+</html>
+
